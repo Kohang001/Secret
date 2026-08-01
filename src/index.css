@@ -1,0 +1,503 @@
+:root{
+  --bg-deep:#f7f9f1;
+  --bg-panel:#f4f8ef;
+  --bg-panel-2:#e7f0dd;
+  --line:#c9d8bf;
+  --signal:#9fd6aa;
+  --signal-dim:#7db58e;
+  --gold:#e9c9b0;
+  --cream:#325246;
+  --muted:#718d7e;
+  --danger:#ef8f8a;
+  --radius:14px;
+  --font-display:'Prompt',system-ui,sans-serif;
+  --font-mono:'Space Mono',monospace;
+}
+
+*{box-sizing:border-box;}
+
+html,body,#root{
+  height:100%;
+  margin:0;
+}
+
+body{
+  background:
+    radial-gradient(circle at 15% 10%, rgba(159,214,170,0.28), transparent 38%),
+    radial-gradient(circle at 85% 90%, rgba(233,201,176,0.24), transparent 46%),
+    var(--bg-deep);
+  color:var(--cream);
+  font-family:var(--font-display);
+  -webkit-font-smoothing:antialiased;
+}
+
+::selection{ background:var(--signal); color:var(--bg-deep); }
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+/* ---------- layout shell ---------- */
+.app-shell{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 28px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(231,240,221,0.55));
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(6px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-mono);
+  letter-spacing:1px;
+  color:var(--signal);
+  font-size:14px;
+}
+
+.brand .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--signal);
+  box-shadow:0 0 10px var(--signal);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;}
+  50%{opacity:0.35;}
+}
+
+.progress-pill{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(0,0,0,0.15);
+}
+
+.main-area{
+  flex:1;
+  padding:36px 24px 80px;
+  max-width:1080px;
+  margin:0 auto;
+  width:100%;
+}
+
+/* ---------- menu grid ---------- */
+.menu-hero{
+  text-align:center;
+  margin-bottom:36px;
+}
+
+.menu-hero h1{
+  font-size:clamp(28px,4vw,44px);
+  margin:0 0 8px;
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+.menu-hero p{
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+}
+
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(190px,1fr));
+  gap:16px;
+  margin-bottom:36px;
+}
+
+.game-card{
+  position:relative;
+  background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px 16px;
+  text-align:left;
+  transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  color:var(--cream);
+  overflow:hidden;
+}
+
+.game-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--signal-dim);
+  box-shadow:0 10px 24px rgba(0,0,0,0.35);
+}
+
+.game-card.done{
+  border-color:var(--signal);
+  background:linear-gradient(160deg, rgba(159,214,170,0.25), var(--bg-panel-2));
+}
+
+.game-card .num{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--muted);
+  display:block;
+  margin-bottom:10px;
+}
+
+.game-card .name{
+  font-weight:500;
+  font-size:15px;
+  display:block;
+  margin-bottom:14px;
+  line-height:1.35;
+}
+
+.game-card .code-chip{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--bg-deep);
+  background:var(--signal);
+  padding:3px 8px;
+  border-radius:6px;
+  display:inline-block;
+  letter-spacing:1px;
+}
+
+.game-card .lock{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--muted);
+}
+
+.vault-cta{
+  display:block;
+  width:100%;
+  padding:22px;
+  border-radius:var(--radius);
+  border:1px dashed var(--gold);
+  background:rgba(233,194,111,0.06);
+  color:var(--gold);
+  font-family:var(--font-mono);
+  font-size:15px;
+  letter-spacing:1px;
+  text-align:center;
+}
+
+.vault-cta small{
+  display:block;
+  color:var(--muted);
+  font-family:var(--font-display);
+  margin-top:6px;
+  font-size:12px;
+}
+
+/* ---------- game page shell ---------- */
+.game-page{
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+}
+
+.back-btn{
+  background:none;
+  border:1px solid var(--line);
+  color:var(--muted);
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:20px;
+}
+.back-btn:hover{ color:var(--cream); border-color:var(--signal-dim); }
+
+.game-title{
+  font-size:22px;
+  font-weight:600;
+  margin:0 0 6px;
+}
+
+.game-story{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  white-space:pre-line;
+  margin-bottom:22px;
+}
+
+.field-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+input[type=text], input[type=number]{
+  background:rgba(0,0,0,0.25);
+  border:1px solid var(--line);
+  color:var(--cream);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:var(--font-mono);
+  font-size:14px;
+}
+input:focus{ outline:none; border-color:var(--signal); }
+
+.primary-btn{
+  background:var(--signal);
+  color:var(--bg-deep);
+  border:none;
+  padding:11px 22px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:14px;
+}
+.primary-btn:hover{ background:var(--gold); }
+.primary-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+.ghost-btn{
+  background:none;
+  border:1px solid var(--line);
+  color:var(--cream);
+  padding:10px 18px;
+  border-radius:8px;
+  font-size:13px;
+}
+.ghost-btn:hover{ border-color:var(--signal-dim); }
+
+.feedback{
+  margin-top:14px;
+  font-size:13px;
+  font-family:var(--font-mono);
+}
+.feedback.ok{ color:var(--signal); }
+.feedback.err{ color:var(--danger); }
+
+.stat-row{
+  display:flex;
+  gap:18px;
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:16px;
+}
+
+/* result ticket - the binary code reveal */
+.ticket{
+  margin-top:24px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 22px;
+  background:repeating-linear-gradient(135deg, rgba(159,214,170,0.16) 0 10px, rgba(159,214,170,0.06) 10px 20px);
+  border:1px dashed var(--signal);
+  border-radius:10px;
+}
+
+.ticket .set-num{
+  font-family:var(--font-mono);
+  color:var(--gold);
+  font-size:12px;
+}
+.ticket .bits{
+  font-family:var(--font-mono);
+  font-size:18px;
+  letter-spacing:3px;
+  color:var(--signal);
+  text-shadow:0 0 12px rgba(159,214,170,0.55);
+}
+
+/* ---------- Vault / main box ---------- */
+.vault-wrap{
+  text-align:center;
+}
+
+.vault-door{
+  width:min(260px, 70vw);
+  aspect-ratio:1;
+  margin:0 auto 30px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #dfeecf, var(--bg-deep) 70%);
+  border:4px solid var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 60px rgba(233,201,176,0.2), inset 0 0 30px rgba(0,0,0,0.08);
+  position:relative;
+}
+.vault-door.open{
+  border-color:var(--signal);
+  box-shadow:0 0 80px rgba(159,214,170,0.45), inset 0 0 30px rgba(0,0,0,0.08);
+}
+
+.vault-door .center{
+  width:70px;height:70px;border-radius:50%;
+  background:var(--bg-panel);
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);
+  font-size:22px;
+  color:var(--gold);
+}
+.vault-door.open .center{
+  border-color:var(--signal);
+  color:var(--signal);
+}
+
+.slot-grid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:10px;
+  max-width:640px;
+  margin:0 auto 24px;
+}
+
+@media (max-width:640px){
+  .slot-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+}
+
+.slot{
+  position:relative;
+}
+
+.slot input{
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  padding:9px 4px;
+}
+
+.slot .idx{
+  position:absolute;
+  top:-8px;
+  left:6px;
+  font-size:10px;
+  font-family:var(--font-mono);
+  color:var(--muted);
+  background:var(--bg-panel);
+  padding:0 4px;
+}
+
+.slot.locked input{
+  background:rgba(159,214,170,0.16);
+  border-color:var(--signal-dim);
+  color:var(--signal);
+}
+
+/* reveal screen */
+.reveal-wrap{
+  text-align:center;
+  padding:60px 20px;
+}
+.reveal-wrap h2{
+  font-family:var(--font-mono);
+  color:var(--muted);
+  font-size:14px;
+  letter-spacing:2px;
+  margin-bottom:24px;
+}
+.reveal-message{
+  font-size:clamp(36px,7vw,64px);
+  font-weight:700;
+  color:var(--gold);
+  text-shadow:0 0 30px rgba(233,201,176,0.4);
+  margin:0;
+}
+
+/* generic mini-game canvas box */
+.game-stage{
+  position:relative;
+  width:100%;
+  max-width:480px;
+  height:360px;
+  margin:0 auto;
+  background:radial-gradient(circle at 50% 0%, rgba(159,214,170,0.18), transparent 60%), var(--bg-deep);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  user-select:none;
+}
+
+.reset-link{
+  margin-top:30px;
+  font-size:12px;
+  color:var(--muted);
+  text-decoration:underline;
+  background:none;
+  border:none;
+}
+
+/* ---------- pink celebration mode ---------- */
+body.reveal-pink{
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.25), transparent 40%),
+    radial-gradient(circle at 80% 85%, rgba(255,255,255,0.15), transparent 45%),
+    linear-gradient(160deg, #ffb6d9, #ff8fc7 55%, #ff6fb3);
+  transition:background 2.2s ease;
+}
+
+body:not(.reveal-pink){
+  transition:background 1.2s ease;
+}
+
+.heart-rain{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:50;
+}
+
+.heart-rain .heart{
+  position:absolute;
+  top:-40px;
+  animation-name:heart-fall;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.5));
+}
+
+@keyframes heart-fall{
+  0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+  8%{ opacity:1; }
+  100%{ transform:translateY(110vh) rotate(360deg); opacity:0.9; }
+}
+
+.reveal-wrap.pink .reveal-message{
+  color:#8a1450;
+  text-shadow:0 0 24px rgba(255,255,255,0.6);
+}
+
+.reveal-wrap.pink h2{
+  color:rgba(90,10,50,0.75);
+}
+
+.reveal-wrap.pink .vault-door.open{
+  border-color:#ffffff;
+  box-shadow:0 0 80px rgba(255,255,255,0.5), inset 0 0 30px rgba(0,0,0,0.15);
+  background:radial-gradient(circle at 35% 30%, #ffe1f0, #ff8fc7 70%);
+}
+.reveal-wrap.pink .vault-door.open .center{
+  border-color:#8a1450;
+  color:#8a1450;
+}
+
+.music-note{
+  margin-top:18px;
+  font-size:12px;
+  color:rgba(90,10,50,0.7);
+}
+.reveal-wrap:not(.pink) .music-note{
+  color:var(--muted);
+}
