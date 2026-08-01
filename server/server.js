@@ -39,7 +39,7 @@ const EXPECTED = {
   },
   6: {
     type: 'short',
-    answers: ['ชมพู', '5', 'เขียนโค้ด', 'blue box', 'บลูบ๊อกซ์', 'TODO-ใส่คำตอบที่ถูกต้อง'],
+    answers: ['ชมพู', '5', 'เขียนโค้ด', 'blue box', 'อินเดีย'],
   },
   16: {
     type: 'short',
