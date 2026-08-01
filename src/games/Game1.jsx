@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import GameShell from '../components/GameShell'
 
 const TIME_LIMIT = 20
-const TARGET_HITS = 35
+const TARGET_HITS = 30
 const STAGE_W = 560
 const STAGE_H = 440
 
