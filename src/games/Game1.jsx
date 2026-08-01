@@ -3,8 +3,8 @@ import GameShell from '../components/GameShell'
 
 const TIME_LIMIT = 20
 const TARGET_HITS = 35
-const STAGE_W = 460
-const STAGE_H = 340
+const STAGE_W = 560
+const STAGE_H = 440
 
 function randomCircle() {
   const size = 26 + Math.random() * 34 // 26-60px
