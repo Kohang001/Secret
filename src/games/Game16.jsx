@@ -1,6 +1,6 @@
 import GameShell from '../components/GameShell'
 import ShortAnswerQuiz from '../components/ShortAnswerQuiz'
-import { boxOrderDigest } from '../data/gameData'
+import { boxOrder } from '../data/gameData'
 
 const questions = [
   { label: '1. ถ้า 2x = 28 จงหาค่าของ x' },
@@ -40,7 +40,9 @@ export default function Game16({ done, onBack, onSuccess }) {
       revealContent={
         <div className="ticket" style={{ flexWrap: 'wrap', maxWidth: 560 }}>
           <span className="set-num">ลำดับการเรียงของชุดรหัสลับ</span>
-          <span className="bits" style={{ fontSize: 14, letterSpacing: 1 }}>{boxOrderDigest().slice(0, 12)}</span>
+          <span className="bits" style={{ fontSize: 14, letterSpacing: 1 }}>
+            "{boxOrder.join(', ')}"
+          </span>
         </div>
       }
     >
